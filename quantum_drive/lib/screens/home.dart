@@ -5,6 +5,7 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:quantum_drive/widgets/joystick.dart';
 import 'package:quantum_drive/widgets/web_socket_connection.dart';
+import 'dart:convert';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -60,7 +61,8 @@ class _HomeState extends State<Home> {
         "left_joystick": {"x": _leftJoystick.dx, "y": _leftJoystick.dy},
         "right_joystick": {"x": _rightJoystick.dx, "y": _rightJoystick.dy},
       };
-      _webSocketChannel!.sink.add(data.toString());
+      String jsonData = jsonEncode(data);
+      _webSocketChannel!.sink.add(jsonData);
     }
   }
 
